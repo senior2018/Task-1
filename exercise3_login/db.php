@@ -9,7 +9,7 @@
 $DB_HOST = "127.0.0.1";        // Where MySQL is running (your own computer)
 $DB_NAME = "task1";            // The database name we'll use for this exercise
 $DB_USER = "root";             // Your MySQL username
-$DB_PASS = "Senior.P2018";    // Your MySQL password — type yours here
+$DB_PASS = "DB_PASSWRORD";    // Your MySQL password — type yours here
 
 // "DSN" stands for Data Source Name — it's a string that tells PDO
 // which type of database to connect to and which one to open.

@@ -13,7 +13,7 @@
 $DB_HOST = "127.0.0.1";
 $DB_NAME = "task1";
 $DB_USER = "root";
-$DB_PASS = "Senior.P2018";   // Type your MySQL password here
+$DB_PASS = "DB_PASSWORD";   // Type your MySQL password here
 
 try {
     // Connect WITHOUT picking a database (notice no "dbname=" in the DSN).
