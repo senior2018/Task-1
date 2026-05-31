@@ -3,18 +3,13 @@
 // WELCOME PAGE — only shown to users who are logged in
 // ====================================================================
 
-// Resume the session that was started during login
 session_start();
 
-// If the session doesn't have a user_id, the visitor is NOT logged in.
-// Kick them back to the login page.
 if (empty($_SESSION["user_id"])) {
     header("Location: login.php");
     exit;
 }
 
-// Grab the username we saved at login time so we can display it.
-// htmlspecialchars() makes it safe to print in HTML.
 $username = htmlspecialchars($_SESSION["username"]);
 ?>
 <!DOCTYPE html>

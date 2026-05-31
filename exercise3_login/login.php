@@ -1,82 +1,64 @@
 <?php
-// ====================================================================
-// LOGIN PAGE — checks the username/password against the database
-// ====================================================================
-
-// session_start() must be called BEFORE any HTML is sent to the browser.
-// Sessions let us "remember" the user across multiple pages
-// (without making them log in again on every click).
 session_start();
 
-require_once "db.php";
+include "db.php";
 
-$error = "";
+if(isset($_POST['login']))
+{
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $user = $pdo->query(
+        "SELECT * FROM users WHERE username='$username'"
+    )->fetch(PDO::FETCH_ASSOC);
 
-    $username = trim($_POST["username"] ?? "");
-    $password = $_POST["password"] ?? "";
+    if($user)
+    {
+        if($password == $user['password'])
+        {
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
 
-    // Basic validation: both fields required
-    if ($username === "" || $password === "") {
-        $error = "Please enter both username and password.";
-    } else {
-        // Look for a user with this username.
-        // Again, we use a prepared statement to safely include the value.
-        $stmt = $pdo->prepare("SELECT id, username, password FROM users WHERE username = :username");
-        $stmt->execute([":username" => $username]);
-
-        // fetch() returns the matching row, or false if no match
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Check two things:
-        //  1. We actually found a user with that username
-        //  2. The password they typed matches the hashed password in the DB
-        // password_verify() handles the hash comparison for us.
-        if ($user && password_verify($password, $user["password"])) {
-            // Success! Save info into the session so other pages know who's logged in.
-            $_SESSION["user_id"] = $user["id"];
-            $_SESSION["username"] = $user["username"];
-
-            // Redirect to the welcome page
             header("Location: welcome.php");
-            exit;   // stop executing after a redirect
-        } else {
-            // We give the SAME error for "wrong username" and "wrong password"
-            // so an attacker can't tell which usernames exist.
-            $error = "Invalid username or password.";
+            exit();
         }
+        else
+        {
+            echo "Wrong password";
+
+            }
+    }
+    else
+    {
+        echo "User not found";
     }
 }
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <div class="box">
-    <h2>Log In</h2>
+    <h2>Login</h2>
 
-    <?php
-    if ($error !== "") {
-        echo "<div class='error'>" . htmlspecialchars($error) . "</div>";
-    }
-    ?>
+    <form method="POST">
+        <input type="text" name="username" placeholder="Username">
 
-    <form method="post" action="">
-        <label>Username</label>
-        <input type="text" name="username" required>
+        <input type="password" name="password" placeholder="Password">
 
-        <label>Password</label>
-        <input type="password" name="password" required>
-
-        <button type="submit">Log In</button>
+        <button type="submit" name="login">Login</button>
     </form>
 
-    <p>No account yet? <a href="register.php">Register here</a>.</p>
+    <p>
+        Don't have an account?
+        <a href="register.php">Register</a>
+    </p>
 </div>
+
 </body>
 </html>

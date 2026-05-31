@@ -1,71 +1,41 @@
-/* Shared style for all login-system pages */
-
-body {
+body{
     font-family: Arial, sans-serif;
-    background: #f3f4f6;
-    padding: 40px;
+    background:#f4f4f4;
 }
 
-/* The white card that holds the form */
-.box {
-    background: #fff;
-    max-width: 400px;
-    margin: auto;
-    padding: 24px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+.box{
+    width:350px;
+    margin:100px auto;
+    background:white;
+    padding:20px;
+    border-radius:8px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
-h2 {
-    margin-top: 0;
-    color: #1e40af;
+h2{
+    text-align:center;
 }
 
-label {
-    display: block;          /* puts each label on its own line */
-    margin-top: 12px;
-    font-weight: bold;
-    font-size: 14px;
+input{
+    width:100%;
+    padding:10px;
+    margin-bottom:10px;
+    box-sizing:border-box;
 }
 
-input {
-    width: 100%;
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #cbd5e1;
-    border-radius: 4px;
-    box-sizing: border-box;  /* makes width:100% include the padding */
+button{
+    width:100%;
+    padding:10px;
+    border:none;
+    background:#007bff;
+    color:white;
+    cursor:pointer;
 }
 
-button {
-    margin-top: 16px;
-    padding: 10px 16px;
-    background: #2563eb;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    cursor: pointer;
+button:hover{
+    background:#0056b3;
 }
 
-button:hover {
-    background: #1d4ed8;
-}
-
-/* Red box for error messages */
-.error {
-    background: #fee2e2;
-    color: #991b1b;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 12px;
-}
-
-/* Green box for success messages */
-.success {
-    background: #d1fae5;
-    color: #065f46;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 12px;
+p{
+    text-align:center;
 }
